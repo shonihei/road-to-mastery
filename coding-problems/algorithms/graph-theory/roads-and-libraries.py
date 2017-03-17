@@ -1,4 +1,4 @@
-#!/bin/python3
+# Problem : https://www.hackerrank.com/challenges/torque-and-development
 
 import sys
 
@@ -21,7 +21,7 @@ def dfsIslandTraversal(graph, start, visited=None):
         visited = set()
     visited.add(start)
     for n in graph[start] - visited:
-        dfsIslandTraversal(graph, n, visited)
+        dfsIslandTraversal(graph, next, visited)
     return visited
 
 q = int(input().strip())

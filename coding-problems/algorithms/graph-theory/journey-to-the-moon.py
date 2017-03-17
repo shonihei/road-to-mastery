@@ -1,7 +1,4 @@
-from math import factorial as f
-
-def nCr(n, r):
-    return f(n) / (f(r) * f(n - r))
+# Problem : https://www.hackerrank.com/challenges/journey-to-the-moon
 
 N, P = list(map(int, input().strip().split(' ')))
 d = {n : [] for n in range(N)}
