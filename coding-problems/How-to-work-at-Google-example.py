@@ -1,3 +1,4 @@
+# Completed
 # Problem: https://www.youtube.com/watch?v=XKu_SEDAykw&index=11&list=WL&ab_channel=LifeatGoogle
 
 def hasPairWithSumSorted(lst, target):

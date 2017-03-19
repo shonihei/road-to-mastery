@@ -1,3 +1,4 @@
+# Not completed => Algorithm works but not with large input (time out error)
 # Problem : https://www.hackerrank.com/challenges/journey-to-the-moon
 
 N, P = list(map(int, input().strip().split(' ')))

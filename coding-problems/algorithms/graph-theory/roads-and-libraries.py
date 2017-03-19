@@ -1,3 +1,4 @@
+# Not complete => algorithm works but not with large input (time out error)
 # Problem : https://www.hackerrank.com/challenges/torque-and-development
 
 import sys
