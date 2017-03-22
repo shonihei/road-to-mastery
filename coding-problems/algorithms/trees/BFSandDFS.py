@@ -1,3 +1,6 @@
+# This is not a problem, just a practice in implementing BFS and DFS in an
+# iterative approach as well as a recursive one.
+
 class Node:
     def __init__(self, item, left=None, right=None):
         self.key = item
@@ -44,15 +47,14 @@ def DFS(root, target):
     return False, numOp
 
 def DFSrecursive(root, target):
-    numOp = 0
-    return DFSrecursiveAux(root, target, numOp)
-
-def DFSrecursiveAux(root, target, numOp):
-    if root:
-        DFSrecursiveAux(root.left, target, numOp + 1)
-        if root.key == target:
-            print("Found {} in {} moves".format(target, numOp))
-        DFSrecursiveAux(root.right, target, numOp + 1)
+    if not root:
+        return False
+    left = DFSrecursive(root.left, target)
+    print("Checking {}".format(root.key))
+    if root.key == target:
+        return True
+    right = DFSrecursive(root.right, target)
+    return left or right
 
 def main():
     root = Node(10, Node(5, Node(3), Node(7)), Node(13, Node(11), Node(17)))
@@ -71,7 +73,7 @@ def main():
     else:
         print("Not found")
     print()
-    print(DFSrecursive(root, 17))
+    print(DFSrecursive(root, 14))
 
 if __name__ == "__main__":
     main()
