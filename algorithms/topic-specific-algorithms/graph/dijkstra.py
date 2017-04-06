@@ -1,4 +1,5 @@
 # Dijkstra's algorithm implemented for a graph represented using a dict of adjacent nodes
+# Dijkstra's algorithm is used to find the shortest path to any node from a single source
 
 class Graph:
     def __init__(self):
@@ -30,10 +31,12 @@ class Graph:
             # initializing some variables used to keep track
             dist_val = dict() # ideally this would be a min-heap
             for k in self.g:
+                dist_val[k] = dict()
                 if k == source:
-                    dist_val[k] = 0
+                    dist_val[k]["dist"] = 0
                 else:
-                    dist_val[k] = float('inf')
+                    dist_val[k]["dist"] = float('inf')
+                dist_val[k]["path"] = [source]
             visited = []
 
             min_node = source
@@ -45,9 +48,9 @@ class Graph:
                 for k, v in dist_val.items():
                     if k in visited:
                         continue
-                    if v < min_dist:
+                    if v["dist"] < min_dist:
                         min_node = k
-                        min_dist = v
+                        min_dist = v["dist"]
                 if not min_node:
                     continue
                 
@@ -55,10 +58,13 @@ class Graph:
                 neighbors = self.g[min_node]
 
                 for neighbor in neighbors:
-                    cur_dist_val = dist_val[neighbor]
-                    new_dist_val = dist_val[min_node] + self.g[min_node][neighbor]
+                    if neighbor in visited:
+                        continue
+                    cur_dist_val = dist_val[neighbor]["dist"]
+                    new_dist_val = dist_val[min_node]["dist"] + self.g[min_node][neighbor]
                     if new_dist_val < cur_dist_val:
-                        dist_val[neighbor] = new_dist_val
+                        dist_val[neighbor]["dist"] = new_dist_val
+                        dist_val[neighbor]["path"] = dist_val[min_node]["path"] + [neighbor]
             return dist_val
     
 def main():
@@ -76,8 +82,16 @@ def main():
     print(g)
     spt = g.build_spt_from("A")
     print("Shortest distance from A to vertex")
+    print("\tvertex\tdist\tpath")
     for k, v in spt.items():
-        print("\t{} = {}".format(k, v))
+        if v["dist"] == float('inf'):
+            print("\t{}\t{}".format(k, "no path found"))
+            continue
+        path = ""
+        for vertex in v["path"][:-1]:
+            path += str(vertex) + " -> "
+        path += str(v["path"][-1])
+        print("\t{}\t{}\t{}".format(k, v["dist"], path))
     
 if __name__ == "__main__":
     main()
