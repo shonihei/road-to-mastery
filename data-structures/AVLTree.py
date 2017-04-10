@@ -307,9 +307,13 @@ class AVLTree:
         y.balance_factor = 0
         return y
 
-a = AVLTree()
-a.insert(6)
-a.insert(5)
-a.insert(10)
-a.insert(13)
-a.insert(12)
+def main():
+    a = AVLTree()
+    a.insert(6)
+    a.insert(5)
+    a.insert(10)
+    a.insert(13)
+    a.insert(12)
+
+if __name__ == "__main__":
+    main()
