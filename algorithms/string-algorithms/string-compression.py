@@ -1,6 +1,10 @@
+# task: compress a string 
+
 def compress(s):
-    if not s:
+    # if length < 2 then no need to compress
+    if len(s) <= 2:
         return s
+    # compress and see if it gets shorter
     c = 0
     cc = s[0]
     out = ""
@@ -15,3 +19,8 @@ def compress(s):
     if len(s) < len(out):
         return s
     return out
+
+r = ""
+for _ in range(int(input().strip())):
+    r += compress(input().strip()) + "\n"
+print(r)
