@@ -20,7 +20,17 @@ def check_palindrome(head):
         while cur_node:
             l.append(cur_node.key)
             cur_node = cur_node.next
-        if list(reversed(l)) == l:
-            return True
-        return False
 
+        i = 0
+        j = len(l) - 1
+        for i in range(len(l) // 2):
+            if l[i] != l[j]:
+                return False
+            i += 1
+            j -= 1
+        return True
+
+A = Node("A", Node("B", Node("B", Node("A"))))
+B = Node("A", Node("B", Node("C")))
+print(check_palindrome(A))
+print(check_palindrome(B))
