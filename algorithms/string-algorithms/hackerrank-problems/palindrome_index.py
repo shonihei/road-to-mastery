@@ -40,6 +40,26 @@ def palindrome_index_2(s):
             return i
     return -1
 
+# Another O(n^2) solution
+# performs better than previous two because
+# we only check whether something is a palindrome when we spot mismatching characters
+def palindrome_index_3(s):
+    if len(s) == 0:
+        return -1
+    i = 0
+    j = len(s) - 1
+    while i < j:
+        if s[i] == s[j]:
+            i += 1
+            j -= 1
+        else:
+            if is_pal(s[:i] + s[i+1:]):
+                return i
+            elif is_pal(s[:j] + s[j+1:]):
+                return j
+            return -1
+    return -1
+
 import time
 S = "abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbsa"
 s = time.time()
@@ -51,3 +71,7 @@ s = time.time()
 r = palindrome_index_2(S)
 e = time.time()
 print("2nd soln took {}s and returned {}".format(e - s, r))
+s = time.time()
+r = palindrome_index_3(S)
+e = time.time()
+print("3rd soln took {}s and returned {}".format(e - s, r))
