@@ -19,7 +19,7 @@ class BinarySearchTree:
         '''
             prints the content of the tree in an inorder traversal
         '''
-        s = self.repr_aux_postorder(self.root)
+        s = self.repr_aux_inorder(self.root)
         return s + "."
 
     def repr_aux_inorder(self, r, s=""):
