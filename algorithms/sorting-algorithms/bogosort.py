@@ -18,11 +18,10 @@ def is_sorted(lst):
 def bogo_sort(lst):
     while not is_sorted(lst):
         random.shuffle(lst)
-    return lst
     
 lo, hi, n = int(sys.argv[1]), int(sys.argv[2]), int(sys.argv[3])
 l = random.sample(range(lo, hi), n)
 print(l)
-l = bogo_sort(l)
+bogo_sort(l)
 print("random list of {} elements sorted with {} comparisons".format(n, m))
 print(l)

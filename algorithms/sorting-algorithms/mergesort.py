@@ -10,8 +10,7 @@ def merge_sort(lst):
     counter += 2
     l1 = merge_sort(lst[:mid])
     l2 = merge_sort(lst[mid:])
-
-    return merge(l1, l2)
+    lst = merge(l1, l2)
 
 def merge(l1, l2):
     new_lst = []
@@ -31,6 +30,6 @@ def merge(l1, l2):
 
 lo, hi, n = list(map(int, sys.argv[1:4]))
 l = random.sample(range(lo, hi), n)
-l = merge_sort(l)
+merge_sort(l)
 print("random list of {} elements sorted with {} comparisons".format(n, counter))
 print(l)

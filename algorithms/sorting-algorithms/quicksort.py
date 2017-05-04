@@ -1,6 +1,11 @@
 import sys, random
 
 counter = 0
+
+def wrapper(l):
+    lst = quick_sort(l[:])
+    return lst
+
 def quick_sort(lst):
     global counter
     
@@ -38,8 +43,29 @@ def quick_sort(lst):
         counter += 2
         return quick_sort(lst[:pivot]) + [lst[pivot]] + quick_sort(lst[pivot + 1:])
 
-lo, hi, n = list(map(int, sys.argv[1:4]))
-l = random.sample(range(lo, hi), n)
-l = quick_sort(l)
-print("random list of {} elements sorted with {} comparisons".format(n, counter))
-print(l)
+def percent_sorted(u, s):
+    c = 0
+    for i in range(len(u)):
+        j = s.index(u[i])
+        if i <= j:
+            c += 1
+    return c / len(u)
+
+def test(lo, hi, n, test_size):
+    global buckets
+    global counter
+    buckets = dict()
+    for test in range(test_size):
+        l = random.sample(range(lo, hi), n)
+        sorted_lst = wrapper(l)
+        percent_same = percent_sorted(l, sorted_lst)
+        buckets[percent_same] = buckets.get(percent_same, []) + [counter]
+        counter = 0
+    for k, v in sorted(buckets.items()):
+        avg = sum(v) / len(v)
+        print("{:.2f}% sorted: {:.2f} comparisons".format(k * 100, avg))
+        
+#print("original list is {}% sorted".format(percent_same * 100))
+#print("original: {}".format(str(l)))
+#print("sorted  : {}".format(str(sorted_lst)))
+#print("random list of {} elements sorted with {} comparisons".format(n, counter))
