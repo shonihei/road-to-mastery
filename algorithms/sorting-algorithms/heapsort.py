@@ -17,9 +17,11 @@ def heapify(l):
 
 def siftdown(l, s, e):
     while (s * 2 + 1) <= e:
-        sc = s * 2 + 1
-        if sc + 1 <= e and l[sc + 1] > l[sc]:
-            sc += 1
-        if l[sc] > l[s]:
-            l[sc], l[s] = l[s], l[sc]
-        s = sc
+        lc = s * 2 + 1
+        if lc + 1 <= e and l[lc + 1] > l[lc]:
+            lc += 1
+        if l[lc] > l[s]:
+            l[lc], l[s] = l[s], l[lc]
+            s = lc
+        else:
+            break
