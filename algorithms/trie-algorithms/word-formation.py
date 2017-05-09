@@ -20,16 +20,19 @@ def is_possible(node, string):
     i = 0
     node2 = node
     size = len(string)
-    while i < size and string[i] in node.children:
+    while i < size:
+        if string[i] not in node.children:
+            break
         node = node.children[string[i]]
         i += 1
-    print(string[0:i])
     if not node.end:
         return False
-    while i < size and string[i] in node2.children:
+    while i < size:
+        if string[i] not in node2.children:
+            return False
         node2 = node2.children[string[i]]
         i += 1
-    if not node.end:
+    if not node2.end:
         return False
     return True
     
