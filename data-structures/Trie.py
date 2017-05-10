@@ -46,6 +46,23 @@ def search(node, pattern):
     __search(node, pattern)
     return lst
 
+def delete(n, s):
+    def __delete(node, string):
+        if not string:
+            node.word_end = False
+            return node
+        elif string[0] not in node.children:
+            raise KeyError("{} does not exist in Trie".format(string))
+        else:
+            n = __delete(node.children[string[0]], string[1:])
+            if not n.children:
+                del node.children[string[0]]
+            return node
+    __delete(n, s)
+
+def get_all(node):
+    return search(node, "*")
+    
 A = TrieNode()
 add_string(A, "shonihei")
 add_string(A, "sho")
