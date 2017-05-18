@@ -1,64 +1,60 @@
+# Stack implementation based on Java util interface
+
 class Stack:
+    class _Node:
+        def __init__(self, val=None, n=None):
+            self.key = val
+            self.next_node = n
+
     def __init__(self):
-        self.stack = []
-        self.topIndex = 0
-
-    def push(self, key):
-        self.stack.append(key)
-        self.topIndex += 1
-
-    def pop(self):
-        if len(self.stack) == 0:
-            raise IndexError('cannot pop from an empty list')
-        temp = self.stack[self.topIndex - 1]
-        del self.stack[self.topIndex - 1]
-        self.topIndex -= 1
-        return temp
-
-    def isEmpty(self):
-        return len(self.stack) == 0
+        self.head = None
+        self.count = 0
 
     def __repr__(self):
-        return str(self.stack)
+        if not self.count:
+            return "[]"
+        output = "["
+        cur_node = self.head
+        while cur_node.next_node:
+            output += str(cur_node.key) + ", "
+            cur_node = cur_node.next_node
+        return output + str(cur_node.key) + "]"
 
+    def empty(self):
+        return self.count == 0
 
-# Check if parensthesis match
-# true if  "(([]))[]()"
-# false if "))()[[()"
-def isClosed(s):
-    stack = Stack()
-    pairs = {
-        "(":")",
-        "[":"]"
-    }
+    def peek(self):
+        if not self.count:
+            raise IndexError("empty stack")
+        return self.head.key
 
-    for c in s:
-        if c in ['(', '[']:
-            stack.push(c)
-        else:
-            if stack.isEmpty():
-                return False
-            else:
-                popped = stack.pop()
-                if c != pairs[popped]:
-                    return False
-    return stack.isEmpty()
+    def pop(self):
+        if not self.count:
+            raise IndexError("pop from empty list")
+        temp = self.head.key
+        self.head = self.head.next_node
+        self.count -= 1
+        return temp
 
+    def push(self, item):
+        self.head = self._Node(item, self.head)
+        self.count += 1
+
+    def search(self, item):
+        counter = 0
+        cur_node = self.head
+        while cur_node:
+            if cur_node.key == item:
+                return counter
+            counter += 1
+            cur_node = cur_node.next_node
+        return -1
+        
 def main():
-    # stack = Stack()
-    # for i in range(0, 5):
-    #     stack.push(i)
-    # print(stack)
-    # print(stack.pop())
-    # print(stack)
-    # print(stack.pop())
-    # print(stack)
-
-    print("Testing '(([][]))[[]]()'")
-    print(isClosed('(([][]))[[]]()'))
-    print()
-    print("Testing '))))(()()()[][]]]]))]'")
-    print(isClosed('))))(()()()[][]]]]))]'))
-
+    s = Stack()
+    s.push(10)
+    s.push(9)
+    s.push(8)
+    
 if __name__ == "__main__":
     main()
