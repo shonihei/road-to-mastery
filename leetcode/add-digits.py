@@ -9,4 +9,9 @@ Since 2 has only one digit, return it.
 
 Follow up:
 Could you do it without any loop/recursion in O(1) runtime?
+
+num = 17 => 1 + 7 = 8
+num = 489 => 4 + 8 + 9 = 21 => 2 + 1 = 3
 """
+
+
