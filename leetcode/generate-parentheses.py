@@ -5,13 +5,14 @@ all combinations of well-formed parentheses.
 """
 
 def generateParentheses(n):
-    if n == 0:
-        return ""
-    elif n == 1:
-        return "()"
-    else:
-        left = generateParentheses(n - 1) + "()"
-        middle = "(" + generateParentheses(n - 1) + ")"
-        print(left)
-        print(middle)
-        return left
+    lst = []
+    addParenthesis(lst, "", 0, n)
+    return lst
+
+def addParenthesis(lst, s, _open, close):
+    if close:
+        addParenthesis(lst, s + "(", _open + 1, close - 1)
+    if _open:
+        addParenthesis(lst, s + ")", _open - 1, close)
+    if _open == 0 and close == 0:
+        lst.append(s)
