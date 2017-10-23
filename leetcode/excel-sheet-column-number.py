@@ -24,5 +24,8 @@ class Test(unittest.TestCase):
     def test2(self):
         self.assertEqual(titleToNumber("A"), 1)
 
+    def test3(self):
+        self.assertEqual(titleToNumber("EP"), 146)
+
 if __name__ == "__main__":
     unittest.main()
