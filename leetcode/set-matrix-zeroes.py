@@ -24,9 +24,3 @@ def modCol(col, N, modded, matrix):
 		if matrix[i][col] != 0:
 			matrix[i][col] = 0
 			modded[i][col] = True
-
-a = [
-	[3, 4, 1, 0],
-	[2, 0, 2, 1],
-	[5, 5, 5, 1]
-]
